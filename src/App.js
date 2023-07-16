@@ -42,12 +42,17 @@ function App() {
       {weatherData ? (
         <div>
           <h2>{weatherData.name}</h2>
+          <h2>{new Date().toDateString()}</h2>
+          <h2>{new Date().toLocaleTimeString()}</h2>
           <h2>{weatherData.main.temp}°C</h2>
           <p>{weatherData.weather[0].description}</p>
         </div>
       ) : (
         <p>날씨 정보를 불러오는 중입니다...</p>
       )}
+      <button>Current Location</button>
+      <button>London</button>
+      <button>New York</button>
     </div>
   );
 }
