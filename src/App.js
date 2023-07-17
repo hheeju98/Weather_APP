@@ -1,6 +1,8 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Button from "react-bootstrap/Button";
 
 function App() {
   const [weatherData, setWeatherData] = useState("");
@@ -66,9 +68,11 @@ function App() {
       ) : (
         <p></p>
       )}
-      <button onClick={handleCurrentLocationClick}>Current Location</button>
-      <button>London</button>
-      <button>New York</button>
+      <Button variant="info" onClick={handleCurrentLocationClick}>
+        Current Location
+      </Button>
+      <Button variant="info">London</Button>
+      <Button variant="info">New York</Button>
     </div>
   );
 }
