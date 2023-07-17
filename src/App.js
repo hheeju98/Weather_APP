@@ -9,6 +9,7 @@ function App() {
 
   const API_KEY = "c6dd83a313a396f0868c4e5c0121923c";
   const API_URL = "https://api.openweathermap.org/data/2.5/weather";
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -16,15 +17,11 @@ function App() {
         setLongitude(position.coords.longitude);
       },
       (error) => {
+        <h1>에러 발생</h1>;
         console.error(error);
       }
     );
   }, []);
-  useEffect(() => {
-    if (latitude && longitude) {
-      getWeatherData();
-    }
-  }, [latitude, longitude]);
 
   const getWeatherData = async () => {
     try {
@@ -37,20 +34,39 @@ function App() {
       console.error(error);
     }
   };
+
+  const handleCurrentLocationClick = () => {
+    if (latitude && longitude) {
+      if (weatherData) {
+        setWeatherData(""); // 날씨 정보 초기화
+      } else {
+        getWeatherData();
+      }
+    }
+  };
+
+  // 시간 포맷 설정 (초는 안보여주기)
+  const formatTime = (timeString) => {
+    return new Date(timeString).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <div>
       {weatherData ? (
         <div>
           <h2>{weatherData.name}</h2>
           <h2>{new Date().toDateString()}</h2>
-          <h2>{new Date().toLocaleTimeString()}</h2>
+          <h2>{formatTime(new Date())}</h2>
           <h2>{weatherData.main.temp}°C</h2>
           <p>{weatherData.weather[0].description}</p>
         </div>
       ) : (
-        <p>날씨 정보를 불러오는 중입니다...</p>
+        <p></p>
       )}
-      <button>Current Location</button>
+      <button onClick={handleCurrentLocationClick}>Current Location</button>
       <button>London</button>
       <button>New York</button>
     </div>
