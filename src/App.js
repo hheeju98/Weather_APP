@@ -13,19 +13,28 @@ function App() {
   const API_URL = "https://api.openweathermap.org/data/2.5/weather";
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLatitude(position.coords.latitude);
-        setLongitude(position.coords.longitude);
-      },
-      (error) => {
-        <h1>에러 발생</h1>;
+    const getWeatherByCurrentLocation = async () => {
+      try {
+        const position = await getCurrentPosition();
+        const { latitude, longitude } = position.coords;
+        setLatitude(latitude);
+        setLongitude(longitude);
+        getWeatherData(latitude, longitude);
+      } catch (error) {
         console.error(error);
       }
-    );
+    };
+
+    const getCurrentPosition = () => {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+    };
+
+    getWeatherByCurrentLocation();
   }, []);
 
-  const getWeatherData = async () => {
+  const getWeatherData = async (latitude, longitude) => {
     try {
       const response = await axios.get(
         `${API_URL}?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
@@ -42,7 +51,7 @@ function App() {
       if (weatherData) {
         setWeatherData(""); // 날씨 정보 초기화
       } else {
-        getWeatherData();
+        getWeatherData(latitude, longitude);
       }
     }
   };
@@ -57,6 +66,14 @@ function App() {
 
   return (
     <div>
+      <Button variant="info" onClick={handleCurrentLocationClick}>
+        Current Location
+      </Button>
+      <Button variant="info">London</Button>
+      <Button variant="info">New York</Button>
+      <Button variant="info">Paris</Button>
+      <Button variant="info">Tokyo</Button>
+
       {weatherData ? (
         <div>
           <h2>{weatherData.name}</h2>
@@ -68,11 +85,6 @@ function App() {
       ) : (
         <p></p>
       )}
-      <Button variant="info" onClick={handleCurrentLocationClick}>
-        Current Location
-      </Button>
-      <Button variant="info">London</Button>
-      <Button variant="info">New York</Button>
     </div>
   );
 }
