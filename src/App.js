@@ -103,18 +103,17 @@ function App() {
 
   return (
     <div>
-      <Form onSubmit={handleSearchSubmit} className="mt-3">
-        <Form.Control
-          type="text"
-          placeholder="도시를 입력하세요"
-          value={searchCity}
-          onChange={handleSearchChange}
-        />
-        <Button variant="info" type="submit" className="mt-2">
-          검색
-        </Button>
-      </Form>
-
+      {weatherData ? (
+        <div>
+          <h2>{weatherData.name}</h2>
+          <h2>{new Date().toDateString()}</h2>
+          <h2>{formatTime(new Date())}</h2>
+          <h2>{weatherData.main.temp}°C</h2>
+          <p>{weatherData.weather[0].description}</p>
+        </div>
+      ) : (
+        <p></p>
+      )}
       <Button variant="info" onClick={handleCurrentLocationClick}>
         Current Location
       </Button>
@@ -131,17 +130,17 @@ function App() {
         Tokyo
       </Button>
 
-      {weatherData ? (
-        <div>
-          <h2>{weatherData.name}</h2>
-          <h2>{new Date().toDateString()}</h2>
-          <h2>{formatTime(new Date())}</h2>
-          <h2>{weatherData.main.temp}°C</h2>
-          <p>{weatherData.weather[0].description}</p>
-        </div>
-      ) : (
-        <p></p>
-      )}
+      <Form onSubmit={handleSearchSubmit} className="mt-3">
+        <Form.Control
+          type="text"
+          placeholder="도시를 입력하세요"
+          value={searchCity}
+          onChange={handleSearchChange}
+        />
+        <Button variant="info" type="submit" className="mt-2">
+          검색
+        </Button>
+      </Form>
     </div>
   );
 }
