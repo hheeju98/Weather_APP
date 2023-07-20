@@ -101,35 +101,43 @@ function App() {
     });
   };
 
+  // 온도가 26도 이상일 경우에 배경색 변경
+  const temperatureStyleClass = () => {
+    return weatherData && weatherData.main.temp > 26 ? "hot_temperature" : "";
+  };
+
   return (
-    <div>
-      {weatherData ? (
-        <div>
-          <h2>{weatherData.name}</h2>
-          <h2>{new Date().toDateString()}</h2>
-          <h2>{formatTime(new Date())}</h2>
-          <h2>{weatherData.main.temp}°C</h2>
+    <div className={`weather_box ${temperatureStyleClass()}`}>
+      {weatherData && (
+        <div className="weather_info-container">
+          <p>{weatherData.name}</p>
+          <p>{new Date().toDateString()}</p>
+          <p>{formatTime(new Date())}</p>
+          <p>{weatherData.main.temp}°C</p>
           <p>{weatherData.weather[0].description}</p>
         </div>
-      ) : (
-        <p></p>
       )}
-      <Button variant="info" onClick={handleCurrentLocationClick}>
-        Current Location
-      </Button>
-      <Button variant="info" onClick={() => handleCityButtonClick("London")}>
-        London
-      </Button>
-      <Button variant="info" onClick={() => handleCityButtonClick("New York")}>
-        New York
-      </Button>
-      <Button variant="info" onClick={() => handleCityButtonClick("Paris")}>
-        Paris
-      </Button>
-      <Button variant="info" onClick={() => handleCityButtonClick("Tokyo")}>
-        Tokyo
-      </Button>
 
+      <div>
+        <Button variant="info" onClick={handleCurrentLocationClick}>
+          Current Location
+        </Button>
+        <Button variant="info" onClick={() => handleCityButtonClick("London")}>
+          London
+        </Button>
+        <Button
+          variant="info"
+          onClick={() => handleCityButtonClick("New York")}
+        >
+          New York
+        </Button>
+        <Button variant="info" onClick={() => handleCityButtonClick("Paris")}>
+          Paris
+        </Button>
+        <Button variant="info" onClick={() => handleCityButtonClick("Tokyo")}>
+          Tokyo
+        </Button>
+      </div>
       <Form onSubmit={handleSearchSubmit} className="mt-3">
         <Form.Control
           type="text"
