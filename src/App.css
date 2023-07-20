@@ -29,9 +29,24 @@ body {
 
 .weather_info-container {
   font-size: 18px;
-  margin: auto;
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center;
+  flex-direction: column;
+  padding-top: 120px;
 }
 
+.weather_btn {
+  padding: 10px;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.search_btn {
+  display: flex;
+  justify-content: center;
+}
 form {
   width: 270px;
 }

@@ -110,45 +110,54 @@ function App() {
     <div className={`weather_box ${temperatureStyleClass()}`}>
       {weatherData && (
         <div className="weather_info-container">
-          <p>{weatherData.name}</p>
-          <p>{new Date().toDateString()}</p>
-          <p>{formatTime(new Date())}</p>
-          <p>{weatherData.main.temp}°C</p>
-          <p>{weatherData.weather[0].description}</p>
+          <div>{weatherData.name}</div>
+          <div>{new Date().toDateString()}</div>
+          <div>{formatTime(new Date())}</div>
+          <div>{weatherData.main.temp}°C</div>
+          <div>{weatherData.weather[0].description}</div>
         </div>
       )}
 
       <div>
-        <Button variant="info" onClick={handleCurrentLocationClick}>
-          Current Location
-        </Button>
-        <Button variant="info" onClick={() => handleCityButtonClick("London")}>
-          London
-        </Button>
-        <Button
-          variant="info"
-          onClick={() => handleCityButtonClick("New York")}
-        >
-          New York
-        </Button>
-        <Button variant="info" onClick={() => handleCityButtonClick("Paris")}>
-          Paris
-        </Button>
-        <Button variant="info" onClick={() => handleCityButtonClick("Tokyo")}>
-          Tokyo
-        </Button>
+        <div className="weather_btn">
+          <Button variant="info" onClick={handleCurrentLocationClick}>
+            Current Location
+          </Button>
+
+          <Button
+            variant="info"
+            onClick={() => handleCityButtonClick("London")}
+          >
+            London
+          </Button>
+          <Button
+            variant="info"
+            onClick={() => handleCityButtonClick("New York")}
+          >
+            New York
+          </Button>
+          <Button variant="info" onClick={() => handleCityButtonClick("Paris")}>
+            Paris
+          </Button>
+          <Button variant="info" onClick={() => handleCityButtonClick("Tokyo")}>
+            Tokyo
+          </Button>
+        </div>
       </div>
-      <Form onSubmit={handleSearchSubmit} className="mt-3">
-        <Form.Control
-          type="text"
-          placeholder="도시를 입력하세요"
-          value={searchCity}
-          onChange={handleSearchChange}
-        />
-        <Button variant="info" type="submit" className="mt-2">
-          검색
-        </Button>
-      </Form>
+
+      <div className="search_btn">
+        <Form onSubmit={handleSearchSubmit} className="mt-3">
+          <Form.Control
+            type="text"
+            placeholder="도시를 입력하세요"
+            value={searchCity}
+            onChange={handleSearchChange}
+          />
+          <Button variant="info" type="submit" className="mt-2">
+            검색
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 }
