@@ -37,16 +37,51 @@ body {
 }
 
 .weather_btn {
-  padding: 10px;
   display: flex;
-  margin: auto;
   justify-content: center;
+  padding: 1rem;
 }
 
 .search_btn {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 form {
   width: 270px;
+  height: 35px;
+  display: flex;
+}
+
+.location {
+  font-size: 35px;
+}
+
+.temperature {
+  font-size: 26px;
+}
+
+button {
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size: 1.6em;
+  font-weight: bold;
+  padding: 10px;
+  position: relative;
+}
+
+button:hover {
+  background-color: #fbceb1;
+}
+
+.search {
+  display: flex;
+  margin-left: 10px;
+}
+
+.search_button {
+  width: 55px;
+  align-items: center;
+  display: flex;
 }

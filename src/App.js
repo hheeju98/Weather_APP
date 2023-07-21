@@ -2,7 +2,6 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 function App() {
@@ -110,38 +109,41 @@ function App() {
     <div className={`weather_box ${temperatureStyleClass()}`}>
       {weatherData && (
         <div className="weather_info-container">
-          <div>{weatherData.name}</div>
+          <div className="location">{weatherData.name}</div>
+          <div className="temperature">{weatherData.main.temp}°C</div>
+          <div>{weatherData.weather[0].description}</div>
           <div>{new Date().toDateString()}</div>
           <div>{formatTime(new Date())}</div>
-          <div>{weatherData.main.temp}°C</div>
-          <div>{weatherData.weather[0].description}</div>
         </div>
       )}
 
       <div>
         <div className="weather_btn">
-          <Button variant="info" onClick={handleCurrentLocationClick}>
-            Current Location
-          </Button>
-
-          <Button
-            variant="info"
-            onClick={() => handleCityButtonClick("London")}
-          >
-            London
-          </Button>
-          <Button
-            variant="info"
-            onClick={() => handleCityButtonClick("New York")}
-          >
-            New York
-          </Button>
-          <Button variant="info" onClick={() => handleCityButtonClick("Paris")}>
-            Paris
-          </Button>
-          <Button variant="info" onClick={() => handleCityButtonClick("Tokyo")}>
-            Tokyo
-          </Button>
+          <div className="btn">
+            <button onClick={handleCurrentLocationClick}>
+              Current Location
+            </button>
+          </div>
+          <div className="btn">
+            <button onClick={() => handleCityButtonClick("London")}>
+              London
+            </button>
+          </div>
+          <div className="btn">
+            <button onClick={() => handleCityButtonClick("New York")}>
+              New York
+            </button>
+          </div>
+          <div className="btn">
+            <button onClick={() => handleCityButtonClick("Paris")}>
+              Paris
+            </button>
+          </div>
+          <div className="btn">
+            <button onClick={() => handleCityButtonClick("Tokyo")}>
+              Tokyo
+            </button>
+          </div>
         </div>
       </div>
 
@@ -153,9 +155,11 @@ function App() {
             value={searchCity}
             onChange={handleSearchChange}
           />
-          <Button variant="info" type="submit" className="mt-2">
-            검색
-          </Button>
+          <div className="search">
+            <button type="submit" className="search_button">
+              검색
+            </button>
+          </div>
         </Form>
       </div>
     </div>
