@@ -9,7 +9,7 @@ function App() {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [searchCity, setSearchCity] = useState("");
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   const API_KEY = "c6dd83a313a396f0868c4e5c0121923c";
   const API_URL = "https://api.openweathermap.org/data/2.5/weather";
@@ -21,7 +21,7 @@ function App() {
         setLongitude(position.coords.longitude);
       },
       (error) => {
-        setError("위치 정보를 가져올 수 없습니다.");
+        //    setError("위치 정보를 가져올 수 없습니다.");
       }
     );
   }, []);
@@ -38,10 +38,10 @@ function App() {
         `${API_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
       );
       setWeatherData(response.data);
-      setError(null);
+      //  setError(null);
       //  console.log(response.data);
     } catch (error) {
-      setError("날씨 정보를 가져올 수 없습니다.");
+      //   setError("날씨 정보를 가져올 수 없습니다.");
       //   console.error(error);
     }
   };
@@ -85,10 +85,10 @@ function App() {
         `${API_URL}?q=${city}&appid=${API_KEY}&units=metric`
       );
       setWeatherData(response.data);
-      setError(null);
+      // setError(null);
     } catch (error) {
       setWeatherData(null);
-      setError("날씨 정보를 가져올 수 없습니다.");
+      // setError("날씨 정보를 가져올 수 없습니다.");
     }
   };
 
